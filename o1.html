@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Ordering</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    /* #psg{
+     
+      background-color: aqua;
+      height:20%;
+      position: fixed;
+      top: 0;
+    
+      width: 100%;
+      z-index: 100;
+    } */
+    /* .progress {
+      height: 30px;
+      margin-bottom: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      background-color: aqua;
+    } */
+    /* #progress-section{
+      
+    } */
+     #pb1{
+          margin: 0 auto;
+     }
+     #psg{
+      position: fixed;
+      width: 100%;
+      background-color: white;
+      top:0;
+      z-index: 10;
+      
+
+     }
+    #menu{
+     
+      background-color:honeydew;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin-top: 90px;
+    }
+    #delivery-address{
+      background-color:azure;
+    }
+    form{
+      width:50%;
+      margin:auto
+    }
+    #da{
+      text-align: center;
+    }
+    #view-menu-btn{
+      margin:0 50%;
+    }
+    #submit-address-btn{
+      margin:0 50%;
+    }
+    #order-summary{
+      text-align: center;
+      background-color:honeydew;
+      padding: 50px 0;
+    }
+    .card{
+      width:auto;
+      height:auto;
+      margin: auto;
+    }
+   #progress-bar{
+    width:80%;
+    margin-right: 10%;
+   }
+    
+  </style>
+</head>
+<body>
+  
+  <!-- Progress Bar -->
+  <!-- <div class="container" id="pb">
+    
+    <section id="progress-section">
+      <h2>Progress Bar</h2>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </section>
+
+  </div> -->
+
+
+
+  <div class="container">
+    
+    <!-- <div class="progress">
+      <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div> -->
+    
+   
+    <!-- Menu Section -->
+    <section id="menu">
+      <div id="psg">
+        <section id="progress-section">
+          <h2>Progress Bar</h2>
+          <div class="progress my-3">
+            <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </section>
+      </div>
+      <h2 id="da">Menu</h2>
+      <div class="row" id="mr">
+        <div class="col-md-3">
+          <div class="card mb-3">
+            <img src="stuffedcrab.jpg" class="card-img-top" alt="Food Item 1">
+            <div class="card-body">
+              <h5 class="card-title">stuffedcrab fry</h5>
+              <!-- <p class="card-text">Description of Food Item 1</p> -->
+              <p class="card-text">Price: 210 rs</p>
+              <button class="btn btn-primary add-to-cart" data-price="210">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="card mb-3">
+            <img src="shrimpscampi.jpg" class="card-img-top" alt="Food Item 2">
+            <div class="card-body">
+              <h5 class="card-title">shrimpscampi</h5>
+              <!-- <p class="card-text">Description of Food Item 2</p> -->
+              <p class="card-text">Price: 120 rs</p>
+              <button class="btn btn-primary add-to-cart" data-price="120">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <div class="card mb-3">
+            <img src="seafoodpaella.jpg" class="card-img-top" alt="Food Item 3">
+            <div class="card-body">
+              <h5 class="card-title">seafood paella</h5>
+              <!-- <p class="card-text">Description of Food Item 3</p> -->
+              <p class="card-text">Price: 80 rs</p>
+              <button class="btn btn-primary add-to-cart" data-price="80">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card mb-3">
+            <img src="grilledsalmo.jpg" class="card-img-top" alt="Food Item 3">
+            <div class="card-body">
+              <h5 class="card-title">grilledsalmo</h5>
+              <!-- <p class="card-text">Description of Food Item 3</p> -->
+              <p class="card-text">Price: 80 rs</p>
+              <button class="btn btn-primary add-to-cart" data-price="80">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="view-menu-btn" class="btn btn-primary">next</button>
+    </section>
+    
+    <!-- Delivery Address Section -->
+    <section id="delivery-address">
+      <h2 id="da">Delivery Address</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="Enter your address">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" placeholder="Enter your city">
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zip Code</label>
+          <input type="text" class="form-control" id="zipcode" placeholder="Enter your zip code">
+        </div>
+        
+      </form>
+      <button id="submit-address-btn" class="btn btn-primary">next</button>
+    </section>
+    
+    <!-- Order Summary Section -->
+    <section id="order-summary">
+      <h2>Order Summary</h2>
+      <ul id="cart-items" class="list-group">
+        <!-- Cart items will be dynamically added here -->
+      </ul>
+      <h4>Total: <span id="total-price">Rs0</span></h4>
+      <button id="place-order-btn" class="btn btn-primary">Place Order</button>
+    </section>
+
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var cartItems = [];
+      var totalPrice = 0;
+
+      // Add to Cart button click event
+      $(".add-to-cart").click(function() {
+        var price = parseFloat($(this).data("price"));
+        var cardBody = $(this).closest(".card-body");
+        var foodItem = cardBody.find(".card-title").text();
+
+        cartItems.push(foodItem);
+        totalPrice += price;
+
+        updateOrderSummary();
+        
+      });
+
+      // View Menu button click event
+      $("#view-menu-btn").click(function() {
+        updateProgressBar(33);
+      });
+
+      // Submit Address button click event
+      $("#submit-address-btn").click(function() {
+        updateProgressBar(66);
+      });
+
+      // Place Order button click event
+      $("#place-order-btn").click(function() {
+        updateProgressBar(100);
+        alert('order placed')
+      });
+
+      // Update the order summary section
+      function updateOrderSummary() {
+        var cartItemsHtml = "";
+        for (var i = 0; i < cartItems.length; i++) {
+          cartItemsHtml += '<li class="list-group-item">' + cartItems[i] + '</li>';
+        }
+        $("#cart-items").html(cartItemsHtml);
+        $("#total-price").text("Rs" + totalPrice.toFixed(2));
+      }
+
+      // Update the progress bar
+      function updateProgressBar(progress) {
+        $("#progress-bar").css("width", progress + "%");
+        $("#progress-bar").attr("aria-valuenow", progress);
+      }
+    });
+  </script>
+
+</body>
+</html>

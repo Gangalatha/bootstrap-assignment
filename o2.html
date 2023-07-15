@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Ordering</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Online Ordering</h1>
+    
+    <!-- Progress Bar -->
+    <div class="progress">
+      <div id="menu-progress-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Menu Section -->
+    <section id="menu">
+      <h2>Menu</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <img src="path_to_image1.jpg" class="card-img-top" alt="Food Item 1">
+            <div class="card-body">
+              <h5 class="card-title">Food Item 1</h5>
+              <p class="card-text">Description of Food Item 1</p>
+              <p class="card-text">Price: $10</p>
+              <button class="btn btn-primary add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <img src="path_to_image2.jpg" class="card-img-top" alt="Food Item 2">
+            <div class="card-body">
+              <h5 class="card-title">Food Item 2</h5>
+              <p class="card-text">Description of Food Item 2</p>
+              <p class="card-text">Price: $12</p>
+              <button class="btn btn-primary add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card mb-3">
+            <img src="path_to_image3.jpg" class="card-img-top" alt="Food Item 3">
+            <div class="card-body">
+              <h5 class="card-title">Food Item 3</h5>
+              <p class="card-text">Description of Food Item 3</p>
+              <p class="card-text">Price: $8</p>
+              <button class="btn btn-primary add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="view-menu-btn" class="btn btn-primary">View Menu</button>
+    </section>
+    
+    <!-- Progress Bar -->
+    <div class="progress">
+      <div id="address-progress-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Delivery Address Section -->
+    <section id="delivery-address">
+      <h2>Delivery Address</h2>
+      <form>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" placeholder="Enter your address">
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" class="form-control" id="city" placeholder="Enter your city">
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zip Code</label>
+          <input type="text" class="form-control" id="zipcode" placeholder="Enter your zip code">
+        </div>
+        <button id="submit-address-btn" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <button id="submit-address-btn" class="btn btn-primary">Submit Address</button>
+    </section>
+    
+    <!-- Progress Bar -->
+    <div class="progress">
+      <div id="summary-progress-bar" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Order Summary Section -->
+    <section id="order-summary">
+      <h2>Order Summary</h2>
+      <ul id="cart-items" class="list-group">
+        <!-- Cart items will be dynamically added here -->
+      </ul>
+      <h4>Total: <span id="total-price">$0</span></h4>
+      <button id="place-order-btn" class="btn btn-primary">Place Order</button>
+    </section>
+    
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      var cartItems = [];
+      var totalPrice = 0;
+
+      // Add to Cart button click event
+      $(".add-to-cart").click(function() {
+        var cardBody = $(this).closest(".card-body");
+        var foodItem = cardBody.find(".card-title").text();
+        var price = parseFloat(cardBody.find(".card-text:last").text().replace("$", ""));
+
+        cartItems.push(foodItem);
+        totalPrice += price;
+
+        updateOrderSummary();
+        updateProgressBar();
+      });
+
+      // Update the order summary section
+      function updateOrderSummary() {
+        var cartItemsHtml = "";
+        for (var i = 0; i < cartItems.length; i++) {
+          cartItemsHtml += '<li class="list-group-item">' + cartItems[i] + '</li>';
+        }
+        $("#cart-items").html(cartItemsHtml);
+        $("#total-price").text("$" + totalPrice.toFixed(2));
+      }
+
+      // Update the progress bar
+      function updateProgressBar() {
+        var menuProgress = (cartItems.length / 3) * 100; // Assuming 3 menu items
+        var addressProgress = ($("#address").val().trim() !== "" && $("#city").val().trim() !== "" && $("#zipcode").val().trim() !== "") ? 100 : 0;
+        var summaryProgress = ($("#cart-items").children().length > 0) ? 100 : 0;
+
+        $("#menu-progress-bar").css("width", menuProgress + "%");
+        $("#menu-progress-bar").attr("aria-valuenow", menuProgress);
+
+        $("#address-progress-bar").css("width", addressProgress + "%");
+        $("#address-progress-bar").attr("aria-valuenow", addressProgress);
+
+        $("#summary-progress-bar").css("width", summaryProgress + "%");
+        $("#summary-progress-bar").attr("aria-valuenow", summaryProgress);
+      }
+    });
+  </script>
+
+</body>
+</html>

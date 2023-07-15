@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seafood Restaurant - Reservation</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS */
+    .reservation {
+      padding: 50px;
+    }
+
+    .reservation-form {
+      width: 60%;
+    }
+
+    .reservation-image {
+      width: 40%;
+      text-align: center;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 767px) {
+      .reservation-form,
+      .reservation-image {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reservation">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 reservation-form">
+          <h2>Reservation Form</h2>
+          <form id="reservationForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" required>
+            </div>
+            <div class="form-group">
+              <label for="time">Time</label>
+              <input type="time" class="form-control" id="time" required>
+            </div>
+            <div class="form-group">
+              <label for="guests">Number of tables</label>
+              <input type="number" class="form-control" id="guests" placeholder="Enter the number of guests" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Reserve Table</button>
+          </form>
+        </div>
+        <div class="col-md-6 reservation-image">
+          <img src="reserved.jpg" alt="Reservation Image" style="max-width: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (Optional) -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Custom JS -->
+  <script>
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      var name = document.getElementById('name').value;
+      var message = "Thank you, " + name + "! Your table has been reserved.";
+      alert(message);
+    });
+  </script>
+</body>
+</html>

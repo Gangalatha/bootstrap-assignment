@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .progress {
+      height: 30px;
+      margin-bottom: 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    .progress-label {
+      font-weight: bold;
+      margin-left: 5px;
+    }
+  </style>
+  <title>Order Seafood Online</title>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="progress">
+      <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+        aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <div class="text-center mt-3">
+      
+      <h3>Select Seafood Items</h3>
+    </div>
+    <!-- Add your content for Step 1 (selecting seafood items) here -->
+    <div class="text-center mt-3">
+      <h5>Seafood Menu</h5>
+      <form id="step1-form">
+        <label for="crab">Crab:</label>
+        <input type="checkbox" id="crab" name="seafood" value="Crab" >
+        <br>
+        <label for="shrimp">Shrimp:</label>
+        <input type="checkbox" id="shrimp" name="seafood" value="Shrimp">
+        <br>
+        <label for="lobster">Lobster:</label>
+        <input type="checkbox" id="lobster" name="seafood" value="Lobster">
+        <br>
+        <button type="button" onclick="nextStep(1)">Next</button>
+      </form>
+    </div>
+
+    <div class="text-center mt-3">
+      <h3>Provide Delivery Address</h3>
+    </div>
+    <!-- Add your content for Step 2 (providing delivery address) here -->
+    <div class="text-center mt-3">
+      <h5>Delivery Address</h5>
+      <form id="step2-form">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address">
+        <br>
+        <button type="button" onclick="nextStep(2)">Next</button>
+      </form>
+    </div>
+
+    <div class="text-center mt-3">
+      
+      <h3>Confirm Order</h3>
+    </div>
+    <!-- Add your content for Step 3 (confirming order) here -->
+    <div class="text-center mt-3 justify-content-center">
+      <h5>Order Summary</h5>
+      <ul id="order-summary" class="justify-content-center"></ul>
+      <button type="button" onclick="confirmOrder()">Confirm Order</button>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Update the progress value
+    function updateProgressBar(progress) {
+      const progressBar = document.getElementById('progress-bar');
+      progressBar.style.width = progress + '%';
+      progressBar.setAttribute('aria-valuenow', progress);
+      progressBar.textContent = `${progress}%`;
+    }
+
+    // Go to the next step
+    function nextStep(step) {
+      if (step === 1) {
+        const seafoodForm = document.getElementById('step1-form');
+        const selectedSeafoodItems = Array.from(seafoodForm.elements)
+          .filter(element => element.type === 'checkbox' && element.checked)
+          .map(element => element.value);
+        displayOrderSummary(selectedSeafoodItems);
+      } else if (step === 2) {
+        const addressForm = document.getElementById('step2-form');
+        const deliveryAddress = addressForm.elements.address.value;
+        displayConfirmation(deliveryAddress);
+      }
+
+      updateProgressBar(step * 33);
+     
+    
+    }
+
+    // Display the order summary
+    function displayOrderSummary(selectedItems) {
+      const orderSummary = document.getElementById('order-summary');
+      orderSummary.innerHTML = '';
+      selectedItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        orderSummary.appendChild(li);
+      });
+    }
+
+    // Display the order confirmation
+    function displayConfirmation(address) {
+      const orderSummary = document.getElementById('order-summary');
+     
+      const addressLi = document.createElement('li');
+      addressLi.textContent = `Delivery Address: ${address}`;
+      orderSummary.appendChild(addressLi);
+    }
+
+    // Confirm the order
+    function confirmOrder() {
+      updateProgressBar(100);
+      alert('Order confirmed!'); // You can replace this with your own logic to submit the order
+      
+    }
+  </script>
+</body>
+
+</html>
